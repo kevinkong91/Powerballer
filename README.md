@@ -13,7 +13,7 @@ Features:
 * Share your saved number with friends via Message, Mail, Facebook, Twitter, Sina Weibo, etc.
 
 # Installation
-Available for download at: 
+Available for download at the <a href="https://itunes.apple.com/us/app/powerballer/id1075661208">App Store</a>
 
 # Future Improvements
 * Generate numbers that have not in the past
