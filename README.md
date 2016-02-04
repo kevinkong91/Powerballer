@@ -3,7 +3,8 @@ Billionaire Generator - random numbers for the Powerball Lottery.
 Inspired by the 1/13/2016 Powerball frenzy for $1.6B.
 
 
-DEMO: <iframe src="https://player.vimeo.com/video/151870759" width="500" height="888" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/151870759">Powerballer - Billionaire Generator</a> from <a href="https://vimeo.com/user47757036">Kevin Kong</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+Try it on the <a href="https://itunes.apple.com/us/app/powerballer/id1075661208">App Store</a>
+DEMO: <a href="https://vimeo.com/151870759">Powerballer - Billionaire Generator</a> from <a href="https://vimeo.com/user47757036">Kevin Kong</a> on <a href="https://vimeo.com">Vimeo</a>.
 
 
 Features:

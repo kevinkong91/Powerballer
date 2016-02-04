@@ -183,7 +183,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         for label in [currentJackpotLabel, yourChancesLabel, cashValueLabel] {
             
-            let text = label == yourChancesLabel ? "your chance:" : "current jackpot:"
+            let text = label == yourChancesLabel ? "your chances:" : "current jackpot:"
             let centerX = label == yourChancesLabel ? (view.frame.width * 3/4) : (view.frame.width / 4)
             
             label.text = text.uppercaseString
@@ -434,8 +434,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
+    
     //
-    // TableView
+    // MARK: UITableViewDataSource
     //
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -491,6 +492,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
     }
+    
+    
+    
+    
+    
+    //
+    // MARK: UITableViewDelegate
+    //
+    
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -548,14 +558,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     internal func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if (cell?.selected ?? false) {
-            // Deselect manually.
-            //tableView.delegate!.tableView?(tableView, willDeselectRowAtIndexPath: indexPath)
+            // Deselect manually
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             tableView.delegate!.tableView?(tableView, didDeselectRowAtIndexPath: indexPath)
             return nil
         }
         
-        //tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.None)
         return indexPath
     }
     
@@ -632,9 +640,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
+    
     //
-    // METHODS
+    // MARK: Methods
     //
+    
     
     
 
@@ -700,7 +710,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Animate the next set of numbers in
     
-    func showNextSetOfNumbers() {
+    internal func showNextSetOfNumbers() {
         
         // Morph color
         UIView.animateWithDuration(0.6) { () -> Void in
@@ -777,7 +787,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Random Text
     
-    func generateIntroText() {
+    internal func generateIntroText() {
         
         self.introLabel.text = generateString()
         
@@ -818,7 +828,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Random Image
     
-    func animateImage() {
+    internal func animateImage() {
         
         self.generateImage()
         
@@ -857,7 +867,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // Save numbers to CoreData
     
-    func saveCurrentNumbers() {
+    internal func saveCurrentNumbers() {
         
         if !self.newNumbers.isEmpty && !self.powerballNumber.isEmpty {
             
@@ -914,7 +924,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func resetSaveNumbersButton() {
-        self.saveNumbersButton.setTitle("SAVE".uppercaseString, forState: .Normal)
+        self.saveNumbersButton.setTitle("SAVE", forState: .Normal)
     }
     
     
@@ -1034,7 +1044,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func toggleShareButton(){
         let bgColor = myNumberIsSelected ? UIColor.whiteColor().colorWithAlphaComponent(0.8) : UIColor.clearColor()
-        let title = myNumberIsSelected ? "SHARE THIS NUMBER" : "SHARE THE FUN"
+        let title = myNumberIsSelected ? "SHARE THESE NUMBERS" : "SHARE THE FUN"
         let titleColor = myNumberIsSelected ? self.backgroundColor : UIColor.whiteColor()
         let titleColorHighlighted = myNumberIsSelected ? self.backgroundColor.colorWithAlphaComponent(0.2) : UIColor.whiteColor().colorWithAlphaComponent(0.2)
         

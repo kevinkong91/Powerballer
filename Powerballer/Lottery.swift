@@ -100,7 +100,7 @@ class Lottery {
     
     
     
-    // Custom crafted API via Kimono, scraping http://www.powerball.com/pb_home.asp
+    // Custom crafted API via Kimono, scraping https://www.usamega.com/powerball-jackpot.asp
     
     class func fetchJackpotWinnings(completion: ((jackpot: String?, cashValue: String?) -> Void)) {
         
