@@ -13,6 +13,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // Data
     
+    var session: NSURLSession!
+    
     var managedObjectContext:NSManagedObjectContext!
     
     lazy var previousNumbers = [Drawing]()
@@ -68,6 +70,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
         
+        
+        // Web Services
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        self.session = NSURLSession(configuration: config, delegate: nil, delegateQueue: nil)
         
         
         // Title
@@ -966,6 +972,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func showPreviousWinningNumbers() {
         
         if self.previousNumbers.isEmpty {
+            
+            // Apple API
+            let request = NSURLRequest(URL: NSURL(string: "https://data.ny.gov/api/views/d6yy-54nr/rows.json?accessType=DOWNLOAD")!)
+            let dataTask = self.session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+                
+                if let data = data {
+                    
+                    
+                    if let jsonObject = NSJSONSerialization.JSONObjectWithData(data, options: []) {
+                        
+                        var drawingsObjects = [Drawing]()
+                        let drawingsArray = jsonObject["data"].array!
+                        
+                        // Only the 25 most recent drawings
+                        for drawing in drawingsArray[0..<25] {
+                            let dateString = drawing[8].stringValue
+                            let numbers = drawing[9].stringValue
+                            
+                            
+                            // Formatted date
+                            let formatter = NSDateFormatter()
+                            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                            
+                            var dateToAdd = NSDate()
+                            
+                            if let date = formatter.dateFromString(dateString) {
+                                dateToAdd = date
+                            }
+                            
+                            
+                            let drawingToAdd = Drawing(date: dateToAdd, numbers: numbers)
+                            
+                            drawingsObjects.append(drawingToAdd)
+                        }
+                        
+                        return drawingsObjects
+
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+            })
+            
+            
+            dataTask.resume()
+            
+            // Alamofire version
+            
             Lottery.fetchPreviousWinners { (drawings) -> Void in
                 if let drawings = drawings {
                     self.previousNumbers = drawings

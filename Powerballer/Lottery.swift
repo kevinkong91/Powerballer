@@ -28,6 +28,7 @@ class Lottery {
         
         // 1 - API Data Request
         
+        
         Alamofire.request(.GET, "https://data.ny.gov/api/views/d6yy-54nr/rows.json?accessType=DOWNLOAD")
             .validate()
             .responseJSON { (_, _, result) in
